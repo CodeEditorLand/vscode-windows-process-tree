@@ -16,16 +16,19 @@
   "types": "typings/windows-process-tree.d.ts",
   "scripts": {
     "compile": "tsc",
+    "lint": "tslint lib/*.ts typings/*.ts *.ts",
     "prepublish": "tsc",
+    "test": "mocha lib/test.js -t 5000",
     "watch": "tsc -w"
   },
   "dependencies": {
     "node-addon-api": "7.1.0"
   },
   "devDependencies": {
-    "@types/mocha": "10.0.0",
-    "@types/node": "14.14.0",
-    "mocha": "10.0.0",
-    "typescript": "4.0.0"
+    "@types/mocha": "^10.0.0",
+    "@types/node": "^14.14.0",
+    "mocha": "^10.0.0",
+    "tslint": "5.9.1",
+    "typescript": "^4.0.0"
   }
 }
