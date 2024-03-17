@@ -1,31 +1,31 @@
 {
-  "name": "@vscode/windows-process-tree",
-  "version": "0.6.0",
-  "description": "Fetch a Windows process tree fast",
-  "homepage": "https://github.com/microsoft/vscode-windows-process-tree",
+  "author": "Microsoft Corporation",
   "bugs": {
     "url": "https://github.com/microsoft/vscode-windows-process-tree/issues"
   },
+  "dependencies": {
+    "node-addon-api": "7.1.0"
+  },
+  "description": "Fetch a Windows process tree fast",
+  "devDependencies": {
+    "@types/mocha": "10.0.0",
+    "@types/node": "14.14.0",
+    "mocha": "10.0.0",
+    "typescript": "4.0.0"
+  },
+  "homepage": "https://github.com/microsoft/vscode-windows-process-tree",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "name": "@vscode/windows-process-tree",
   "repository": {
     "type": "git",
     "url": "git://github.com/microsoft/vscode-windows-process-tree.git"
   },
-  "license": "MIT",
-  "author": "Microsoft Corporation",
-  "main": "lib/index.js",
-  "types": "typings/windows-process-tree.d.ts",
   "scripts": {
     "compile": "tsc",
     "prepublish": "tsc",
     "watch": "tsc -w"
   },
-  "dependencies": {
-    "node-addon-api": "7.1.0"
-  },
-  "devDependencies": {
-    "@types/mocha": "^10.0.0",
-    "@types/node": "^14.14.0",
-    "mocha": "^10.0.0",
-    "typescript": "^4.0.0"
-  }
+  "types": "typings/windows-process-tree.d.ts",
+  "version": "0.6.0"
 }
