@@ -1,34 +1,8 @@
 {
-	"name": "@vscode/windows-process-tree",
-	"version": "0.0.1",
-	"private": false,
-	"description": "Fetch a Windows process tree fast",
-	"homepage": "https://github.com/CodeEditorLand/Foundation#readme",
-	"bugs": {
-		"url": "https://github.com/CodeEditorLand/Foundation/issues"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/CodeEditorLand/Foundation.git"
-	},
-	"license": "SEE LICENSE IN LICENSE",
-	"author": {
-		"name": "Playform",
-		"email": "Hello@Playform.Cloud",
-		"url": "https://playform.cloud"
-	},
-	"type": "module",
-	"main": "lib/index.js",
-	"types": "typings/windows-process-tree.d.ts",
-	"scripts": {
-		"compile": "tsc",
-		"prepublishOnly": "TypeScriptESBuild 'Source/**/*.ts'",
-		"prepublish": "tsc",
-		"watch": "tsc -w"
-	},
 	"dependencies": {
 		"node-addon-api": "8.0.0"
 	},
+	"description": "Fetch a Windows process tree fast",
 	"devDependencies": {
 		"@types/mocha": "10.0.6",
 		"@types/node": "20.11.30",
@@ -36,7 +10,14 @@
 		"typescript": "5.4.2",
 		"typescript-esbuild": "0.4.5"
 	},
-	"publishConfig": {
-		"access": "public"
-	}
+	"main": "lib/index.js",
+	"name": "@vscode/windows-process-tree",
+	"scripts": {
+		"compile": "tsc",
+		"prepublish": "tsc",
+		"prepublishOnly": "TypeScriptESBuild 'Source/**/*.ts'",
+		"watch": "tsc -w"
+	},
+	"type": "module",
+	"types": "typings/windows-process-tree.d.ts"
 }
