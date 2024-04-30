@@ -1,34 +1,42 @@
 {
-  "name": "@vscode/windows-process-tree",
-  "version": "0.6.0",
-  "description": "Fetch a Windows process tree fast",
-  "main": "lib/index.js",
-  "types": "typings/windows-process-tree.d.ts",
-  "scripts": {
-    "test": "mocha lib/test.js -t 5000",
-    "prepublish": "tsc",
-    "compile": "tsc",
-    "watch": "tsc -w",
-    "lint": "tslint lib/*.ts typings/*.ts *.ts"
-  },
-  "author": "Microsoft Corporation",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/microsoft/vscode-windows-process-tree.git"
-  },
-  "homepage": "https://github.com/microsoft/vscode-windows-process-tree",
-  "bugs": {
-    "url": "https://github.com/microsoft/vscode-windows-process-tree/issues"
-  },
-  "dependencies": {
-    "node-addon-api": "7.1.0"
-  },
-  "devDependencies": {
-    "@types/mocha": "^10.0.0",
-    "@types/node": "^14.14.0",
-    "mocha": "^10.0.0",
-    "tslint": "5.9.1",
-    "typescript": "^4.0.0"
-  }
+	"name": "@vscode/windows-process-tree",
+	"version": "0.0.1",
+	"private": false,
+	"description": "Fetch a Windows process tree fast",
+	"keywords": [
+		"land"
+	],
+	"homepage": "HTTPS://GitHub.Com/CodeEditorLand/LandWindowsProcessTree#readme",
+	"bugs": {
+		"url": "HTTPS://GitHub.Com/CodeEditorLand/LandWindowsProcessTree/issues"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+HTTPS://github.com/CodeEditorLand/LandWindowsProcessTree.git"
+	},
+	"license": "SEE LICENSE IN LICENSE",
+	"author": {
+		"name": "🌆 — Land —",
+		"email": "Land@PlayForm.Cloud",
+		"url": "HTTPS://Land.PlayForm.Cloud"
+	},
+	"type": "module",
+	"main": "lib/index.js",
+	"types": "typings/windows-process-tree.d.ts",
+	"scripts": {
+		"Document": "Document 'Source/**/*.ts'",
+		"compile": "tsc",
+		"prepublishOnly": "Build 'Source/**/*.ts'"
+	},
+	"dependencies": {
+		"node-addon-api": "7.1.0"
+	},
+	"devDependencies": {
+		"@playform/build": "0.0.7",
+		"@playform/document": "0.0.6",
+		"@types/node": "^14.14.0"
+	},
+	"publishConfig": {
+		"access": "public"
+	}
 }
