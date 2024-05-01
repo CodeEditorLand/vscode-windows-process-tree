@@ -29,12 +29,12 @@
 		"prepublishOnly": "Build 'Source/**/*.ts'"
 	},
 	"dependencies": {
-		"node-addon-api": "7.1.0"
+		"node-addon-api": "8.0.0"
 	},
 	"devDependencies": {
 		"@playform/build": "0.0.7",
 		"@playform/document": "0.0.6",
-		"@types/node": "^14.14.0"
+		"@types/node": "20.12.7"
 	},
 	"publishConfig": {
 		"access": "public"
