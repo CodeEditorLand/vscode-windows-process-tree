@@ -1,42 +1,42 @@
 {
-	"name": "@vscode/windows-process-tree",
-	"version": "0.0.1",
-	"private": false,
-	"description": "Fetch a Windows process tree fast",
-	"keywords": [
-		"land"
-	],
-	"homepage": "HTTPS://GitHub.Com/CodeEditorLand/LandWindowsProcessTree#readme",
-	"bugs": {
-		"url": "HTTPS://GitHub.Com/CodeEditorLand/LandWindowsProcessTree/issues"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+HTTPS://github.com/CodeEditorLand/LandWindowsProcessTree.git"
-	},
-	"license": "SEE LICENSE IN LICENSE",
 	"author": {
-		"name": "🌆 — Land —",
 		"email": "Land@PlayForm.Cloud",
+		"name": "🌆 — Land —",
 		"url": "HTTPS://Land.PlayForm.Cloud"
 	},
-	"type": "module",
-	"main": "lib/index.js",
-	"types": "typings/windows-process-tree.d.ts",
-	"scripts": {
-		"Document": "Document 'Source/**/*.ts'",
-		"compile": "tsc",
-		"prepublishOnly": "Build 'Source/**/*.ts'"
+	"bugs": {
+		"url": "HTTPS://GitHub.Com/CodeEditorLand/LandWindowsProcessTree/issues"
 	},
 	"dependencies": {
 		"node-addon-api": "8.0.0"
 	},
+	"description": "Fetch a Windows process tree fast",
 	"devDependencies": {
 		"@playform/build": "0.0.7",
 		"@playform/document": "0.0.6",
 		"@types/node": "20.12.7"
 	},
+	"homepage": "HTTPS://GitHub.Com/CodeEditorLand/LandWindowsProcessTree#readme",
+	"keywords": [
+		"land"
+	],
+	"license": "SEE LICENSE IN LICENSE",
+	"main": "lib/index.js",
+	"name": "@vscode/windows-process-tree",
+	"private": false,
 	"publishConfig": {
 		"access": "public"
-	}
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+HTTPS://github.com/CodeEditorLand/LandWindowsProcessTree.git"
+	},
+	"scripts": {
+		"Document": "Document 'Source/**/*.ts'",
+		"compile": "tsc",
+		"prepublishOnly": "Build 'Source/**/*.ts'"
+	},
+	"type": "module",
+	"types": "typings/windows-process-tree.d.ts",
+	"version": "0.0.1"
 }
