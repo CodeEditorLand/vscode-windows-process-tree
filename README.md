@@ -7,7 +7,7 @@
 A Node.js library that enables quickly fetching process tree information for a
 particular process ID on Windows.
 
-## Usage
+## 🛠️ Usage
 
 ```ts
 import * as child_process from "child_process";
