@@ -1,15 +1,15 @@
 {
-	"name": "@vscode/windows-process-tree",
-	"description": "Fetch a Windows process tree fast",
-	"main": "lib/index.js",
-	"types": "typings/windows-process-tree.d.ts",
-	"scripts": {
-		"compile": "tsc"
-	},
 	"dependencies": {
 		"node-addon-api": "8.1.0"
 	},
+	"description": "Fetch a Windows process tree fast",
 	"devDependencies": {
 		"@types/node": "22.6.0"
-	}
+	},
+	"main": "lib/index.js",
+	"name": "@vscode/windows-process-tree",
+	"scripts": {
+		"compile": "tsc"
+	},
+	"types": "typings/windows-process-tree.d.ts"
 }
