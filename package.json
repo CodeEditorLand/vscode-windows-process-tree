@@ -10,6 +10,6 @@
 		"node-addon-api": "8.1.0"
 	},
 	"devDependencies": {
-		"@types/node": "22.7.2"
+		"@types/node": "22.7.3"
 	}
 }
