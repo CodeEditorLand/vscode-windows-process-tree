@@ -4,7 +4,7 @@
 	},
 	"description": "Fetch a Windows process tree fast",
 	"devDependencies": {
-		"@types/node": "22.8.6"
+		"@types/node": "22.9.0"
 	},
 	"main": "lib/index.js",
 	"name": "@vscode/windows-process-tree",
