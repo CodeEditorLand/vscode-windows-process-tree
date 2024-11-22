@@ -26,6 +26,7 @@ type RequestCallback = (processList: IProcessInfo[]) => void;
 // requestInProgress is used for any function that uses CreateToolhelp32Snapshot, as multiple calls
 // to this cannot be done at the same time.
 let requestInProgress = false;
+
 const globalRequestQueue: RequestCallback[] = [];
 
 const MAX_FILTER_DEPTH = 10;
@@ -59,6 +60,7 @@ function buildRawTree(
 	// Note the process corresponding to `rootPid` when we see it.
 	for (const info of processList) {
 		const myChildren = (childrenOf[info.pid] ??= []);
+
 		const mySiblings = (childrenOf[info.ppid] ??= []);
 
 		const node = { info, children: myChildren };
@@ -87,6 +89,7 @@ export function buildProcessTree(
 		throw new Error("buildProcessTree is only implemented on Windows");
 	}
 	const root = buildRawTree(rootPid, processList);
+
 	if (root === undefined) {
 		return undefined;
 	}
@@ -127,6 +130,7 @@ export function filterProcessList(
 		throw new Error("filterProcessList is only implemented on Windows");
 	}
 	const root = buildRawTree(rootPid, processList);
+
 	if (root === undefined) {
 		return undefined;
 	}
@@ -141,6 +145,7 @@ export function filterProcessList(
 		accum: IProcessInfo[],
 	): IProcessInfo[] {
 		accum.push(info);
+
 		if (depth > 0) {
 			children.forEach((c) => buildList(c, depth - 1, accum));
 		}
@@ -212,6 +217,7 @@ export namespace getProcessList {
 				processList
 					? resolve(processList)
 					: reject(new Error(`Could not find PID ${rootPid}`));
+
 			getProcessList(rootPid, callback, flags);
 		});
 }
@@ -243,6 +249,7 @@ export namespace getProcessCpuUsage {
 				cpuInfos
 					? resolve(cpuInfos)
 					: reject(new Error("Failed to collect CPU info"));
+
 			getProcessCpuUsage(processList, callback);
 		});
 }
@@ -278,6 +285,7 @@ export namespace getProcessTree {
 				tree
 					? resolve(tree)
 					: reject(new Error(`Could not find PID ${rootPid}`));
+
 			getProcessTree(rootPid, callback, flags);
 		});
 }

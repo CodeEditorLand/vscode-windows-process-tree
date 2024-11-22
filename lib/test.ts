@@ -48,16 +48,19 @@ if (isWindows) {
 	describe("getRawProcessList", () => {
 		it("should throw if arguments are not provided", (done) => {
 			assert.throws(() => native.getProcessList());
+
 			done();
 		});
 
 		it("should throw if the first argument is not a function", (done) => {
 			assert.throws(() => native.getProcessList(1));
+
 			done();
 		});
 
 		it("should throw if the second argument is not a number", (done) => {
 			assert.throws(() => native.getProcessList(() => {}, "number"));
+
 			done();
 		});
 
@@ -67,17 +70,20 @@ if (isWindows) {
 					list?.find((p) => p.pid === process.pid),
 					undefined,
 				);
+
 				done();
 			}, 0);
 		});
 
 		it("should handle multiple calls gracefully", (done) => {
 			let counter = 0;
+
 			const callback = (list) => {
 				assert.notStrictEqual(
 					list?.find((p) => p.pid === process.pid),
 					undefined,
 				);
+
 				if (++counter === 2) {
 					done();
 				}
@@ -100,6 +106,7 @@ if (isWindows) {
 						list?.some((p) => p.memory > 0),
 						true,
 					);
+
 					done();
 				}, ProcessDataFlag.Memory);
 			}, ProcessDataFlag.None);
@@ -119,6 +126,7 @@ if (isWindows) {
 						list?.every((p) => typeof p.commandLine === "string"),
 						true,
 					);
+
 					done();
 				}, ProcessDataFlag.CommandLine);
 			}, ProcessDataFlag.None);
@@ -145,6 +153,7 @@ if (isWindows) {
 				assert.strictEqual(list![0].pid, process.pid);
 				assert.strictEqual(list![0].memory, undefined);
 				assert.strictEqual(list![0].commandLine, undefined);
+
 				done();
 			});
 		});
@@ -155,6 +164,7 @@ if (isWindows) {
 			);
 
 			assert.strictEqual(list.length, 1);
+
 			const proc = list[0];
 			assert.strictEqual(proc.name, "node.exe");
 			assert.strictEqual(proc.pid, process.pid);
@@ -168,6 +178,7 @@ if (isWindows) {
 					assert.strictEqual(list![0].name, "node.exe");
 					assert.strictEqual(list![0].pid, process.pid);
 					assert.strictEqual(typeof list![0].memory, "number");
+
 					done();
 				},
 				ProcessDataFlag.Memory,
@@ -191,6 +202,7 @@ if (isWindows) {
 						list![0].commandLine!.indexOf("lib/test.js") > 0,
 						true,
 					);
+
 					done();
 				},
 				ProcessDataFlag.CommandLine,
@@ -228,6 +240,7 @@ if (isWindows) {
 				() => getProcessCpuUsage([], "<…>" as any),
 				/callback.*function/,
 			);
+
 			done();
 		});
 
@@ -245,6 +258,7 @@ if (isWindows) {
 							annotatedList![0].cpu! <= 100,
 						true,
 					);
+
 					done();
 				},
 			);
@@ -257,6 +271,7 @@ if (isWindows) {
 				]);
 
 			assert.strictEqual(annotatedList.length, 1);
+
 			const proc = annotatedList[0];
 			assert.strictEqual(proc.name, "node.exe");
 			assert.strictEqual(proc.pid, process.pid);
@@ -266,19 +281,23 @@ if (isWindows) {
 			this.timeout(3000);
 
 			let counter = 0;
+
 			const callback = (list) => {
 				assert.notStrictEqual(
 					list?.find((p) => p.pid === process.pid),
 					undefined,
 				);
+
 				if (++counter === 2) {
 					done();
 				}
 			};
+
 			getProcessCpuUsage(
 				[{ pid: process.pid, ppid: process.ppid, name: "node.exe" }],
 				callback,
 			);
+
 			getProcessCpuUsage(
 				[{ pid: process.pid, ppid: process.ppid, name: "node.exe" }],
 				callback,
@@ -306,6 +325,7 @@ if (isWindows) {
 				assert.strictEqual(tree!.memory, undefined);
 				assert.strictEqual(tree!.commandLine, undefined);
 				assert.strictEqual(tree!.children.length, 0);
+
 				done();
 			});
 		});
@@ -327,6 +347,7 @@ if (isWindows) {
 					assert.strictEqual(tree!.pid, process.pid);
 					assert.notStrictEqual(tree!.memory, undefined);
 					assert.strictEqual(tree!.children.length, 0);
+
 					done();
 				},
 				ProcessDataFlag.Memory,
@@ -341,6 +362,7 @@ if (isWindows) {
 					assert.strictEqual(tree!.pid, process.pid);
 					assert.strictEqual(typeof tree!.commandLine, "string");
 					assert.strictEqual(tree!.children.length, 0);
+
 					done();
 				},
 				ProcessDataFlag.CommandLine,
@@ -442,6 +464,7 @@ if (isWindows) {
 							__dirname,
 							"./testWorker.js",
 						);
+
 						const worker = new Worker(workerDir);
 						worker.on("message", (message: string) => {
 							assert.strictEqual(message, "done");
@@ -454,6 +477,7 @@ if (isWindows) {
 						});
 					},
 				);
+
 				const processListPromise: Promise<boolean> = new Promise(
 					(resolve) => {
 						getProcessList(process.pid, (list) => {
@@ -466,6 +490,7 @@ if (isWindows) {
 						});
 					},
 				);
+
 				const combinedResult = await Promise.all([
 					workerPromise,
 					processListPromise,
@@ -489,6 +514,7 @@ if (isWindows) {
 							__dirname,
 							"./testWorker.js",
 						);
+
 						const worker = new Worker(workerDir);
 						worker.on("message", (message: string) => {
 							assert.strictEqual(message, "done");
@@ -501,7 +527,9 @@ if (isWindows) {
 						});
 					});
 				};
+
 				const workerPromises: Promise<boolean>[] = [];
+
 				for (let i = 0; i < 50; i++) {
 					workerPromises.push(makeWorkerPromise());
 				}
@@ -517,7 +545,9 @@ if (isWindows) {
 						});
 					},
 				);
+
 				const allPromises = [...workerPromises, processListPromise];
+
 				const workerResult = await Promise.all(allPromises).then(
 					(results) => {
 						return results.every((result) => result);
