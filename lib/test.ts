@@ -88,7 +88,9 @@ if (isWindows) {
 					done();
 				}
 			};
+
 			native.getProcessList(callback, ProcessDataFlag.None);
+
 			native.getProcessList(callback, ProcessDataFlag.None);
 		});
 
@@ -149,9 +151,13 @@ if (isWindows) {
 		it("should return a list containing this process", (done) => {
 			getProcessList(process.pid, (list) => {
 				assert.strictEqual(list?.length, 1);
+
 				assert.strictEqual(list![0].name, "node.exe");
+
 				assert.strictEqual(list![0].pid, process.pid);
+
 				assert.strictEqual(list![0].memory, undefined);
+
 				assert.strictEqual(list![0].commandLine, undefined);
 
 				done();
@@ -166,7 +172,9 @@ if (isWindows) {
 			assert.strictEqual(list.length, 1);
 
 			const proc = list[0];
+
 			assert.strictEqual(proc.name, "node.exe");
+
 			assert.strictEqual(proc.pid, process.pid);
 		});
 
@@ -175,8 +183,11 @@ if (isWindows) {
 				process.pid,
 				(list) => {
 					assert.strictEqual(list?.length, 1);
+
 					assert.strictEqual(list![0].name, "node.exe");
+
 					assert.strictEqual(list![0].pid, process.pid);
+
 					assert.strictEqual(typeof list![0].memory, "number");
 
 					done();
@@ -190,14 +201,18 @@ if (isWindows) {
 				process.pid,
 				(list) => {
 					assert.strictEqual(list?.length, 1);
+
 					assert.strictEqual(list![0].name, "node.exe");
+
 					assert.strictEqual(list![0].pid, process.pid);
+
 					assert.strictEqual(typeof list![0].commandLine, "string");
 					// CommandLine is "<path to node> <path to mocha> lib/test.js"
 					assert.strictEqual(
 						list![0].commandLine!.indexOf("mocha") > 0,
 						true,
 					);
+
 					assert.strictEqual(
 						list![0].commandLine!.indexOf("lib/test.js") > 0,
 						true,
@@ -211,6 +226,7 @@ if (isWindows) {
 
 		it("should return a list containing this process's child processes", (done) => {
 			cps.push(child_process.spawn("cmd.exe"));
+
 			pollUntil(
 				() => {
 					return new Promise((resolve) => {
@@ -236,6 +252,7 @@ if (isWindows) {
 				() => getProcessCpuUsage("<…>" as any, () => null),
 				/processList.*array/,
 			);
+
 			assert.throws(
 				() => getProcessCpuUsage([], "<…>" as any),
 				/callback.*function/,
@@ -249,10 +266,15 @@ if (isWindows) {
 				[{ pid: process.pid, ppid: process.ppid, name: "node.exe" }],
 				(annotatedList) => {
 					assert.strictEqual(annotatedList.length, 1);
+
 					assert.strictEqual(annotatedList![0].name, "node.exe");
+
 					assert.strictEqual(annotatedList![0].pid, process.pid);
+
 					assert.strictEqual(annotatedList![0].memory, undefined);
+
 					assert.strictEqual(typeof annotatedList![0].cpu, "number");
+
 					assert.strictEqual(
 						0 <= annotatedList![0].cpu! &&
 							annotatedList![0].cpu! <= 100,
@@ -273,7 +295,9 @@ if (isWindows) {
 			assert.strictEqual(annotatedList.length, 1);
 
 			const proc = annotatedList[0];
+
 			assert.strictEqual(proc.name, "node.exe");
+
 			assert.strictEqual(proc.pid, process.pid);
 		});
 
@@ -321,9 +345,13 @@ if (isWindows) {
 		it("should return a tree containing this process", (done) => {
 			getProcessTree(process.pid, (tree) => {
 				assert.strictEqual(tree!.name, "node.exe");
+
 				assert.strictEqual(tree!.pid, process.pid);
+
 				assert.strictEqual(tree!.memory, undefined);
+
 				assert.strictEqual(tree!.commandLine, undefined);
+
 				assert.strictEqual(tree!.children.length, 0);
 
 				done();
@@ -336,6 +364,7 @@ if (isWindows) {
 			);
 
 			assert.strictEqual(tree?.name, "node.exe");
+
 			assert.strictEqual(tree?.pid, process.pid);
 		});
 
@@ -344,8 +373,11 @@ if (isWindows) {
 				process.pid,
 				(tree) => {
 					assert.strictEqual(tree!.name, "node.exe");
+
 					assert.strictEqual(tree!.pid, process.pid);
+
 					assert.notStrictEqual(tree!.memory, undefined);
+
 					assert.strictEqual(tree!.children.length, 0);
 
 					done();
@@ -359,8 +391,11 @@ if (isWindows) {
 				process.pid,
 				(tree) => {
 					assert.strictEqual(tree!.name, "node.exe");
+
 					assert.strictEqual(tree!.pid, process.pid);
+
 					assert.strictEqual(typeof tree!.commandLine, "string");
+
 					assert.strictEqual(tree!.children.length, 0);
 
 					done();
@@ -371,6 +406,7 @@ if (isWindows) {
 
 		it("should return a tree containing this process's child processes (simple)", (done) => {
 			cps.push(child_process.spawn("cmd.exe"));
+
 			pollUntil(
 				() => {
 					return new Promise((resolve) => {
@@ -387,7 +423,9 @@ if (isWindows) {
 
 		it("should return a tree containing this process's child processes (complex)", (done) => {
 			cps.push(child_process.spawn("powershell.exe"));
+
 			cps.push(child_process.spawn("cmd.exe", ["/C", "powershell.exe"]));
+
 			pollUntil(
 				() => {
 					return new Promise((resolve) => {
@@ -420,19 +458,27 @@ if (isWindows) {
 				[{ pid: 0, ppid: 0, name: "0" }],
 				3,
 			);
+
 			assert.strictEqual(tree!.pid, 0);
+
 			assert.strictEqual(tree!.children.length, 1);
+
 			assert.strictEqual(tree!.children[0].pid, 0);
+
 			assert.strictEqual(tree!.children[0].children.length, 1);
+
 			assert.strictEqual(tree!.children[0].children[0].pid, 0);
+
 			assert.strictEqual(
 				tree!.children[0].children[0].children.length,
 				1,
 			);
+
 			assert.strictEqual(
 				tree!.children[0].children[0].children[0].pid,
 				0,
 			);
+
 			assert.strictEqual(
 				tree!.children[0].children[0].children[0].children.length,
 				0,
@@ -447,10 +493,15 @@ if (isWindows) {
 				[{ pid: 0, ppid: 0, name: "0" }],
 				3,
 			);
+
 			assert.strictEqual(list?.length, 4);
+
 			assert.strictEqual(list![0].pid, 0);
+
 			assert.strictEqual(list![1].pid, 0);
+
 			assert.strictEqual(list![2].pid, 0);
+
 			assert.strictEqual(list![3].pid, 0);
 		});
 	});
@@ -466,12 +517,15 @@ if (isWindows) {
 						);
 
 						const worker = new Worker(workerDir);
+
 						worker.on("message", (message: string) => {
 							assert.strictEqual(message, "done");
 						});
+
 						worker.on("error", () => {
 							resolve(false);
 						});
+
 						worker.on("exit", (code) => {
 							resolve(code === 0);
 						});
@@ -482,10 +536,15 @@ if (isWindows) {
 					(resolve) => {
 						getProcessList(process.pid, (list) => {
 							assert.strictEqual(list!.length >= 1, true);
+
 							assert.strictEqual(list![0].name, "node.exe");
+
 							assert.strictEqual(list![0].pid, process.pid);
+
 							assert.strictEqual(list![0].memory, undefined);
+
 							assert.strictEqual(list![0].commandLine, undefined);
+
 							resolve(true);
 						});
 					},
@@ -502,6 +561,7 @@ if (isWindows) {
 						return false;
 					},
 				);
+
 				assert.strictEqual(combinedResult, true);
 			}
 		});
@@ -516,12 +576,15 @@ if (isWindows) {
 						);
 
 						const worker = new Worker(workerDir);
+
 						worker.on("message", (message: string) => {
 							assert.strictEqual(message, "done");
 						});
+
 						worker.on("error", () => {
 							resolve(false);
 						});
+
 						worker.on("exit", (code) => {
 							resolve(code === 0);
 						});
@@ -533,14 +596,20 @@ if (isWindows) {
 				for (let i = 0; i < 50; i++) {
 					workerPromises.push(makeWorkerPromise());
 				}
+
 				const processListPromise: Promise<boolean> = new Promise(
 					(resolve) => {
 						getProcessList(process.pid, (list) => {
 							assert.strictEqual(list!.length >= 1, true);
+
 							assert.strictEqual(list![0].name, "node.exe");
+
 							assert.strictEqual(list![0].pid, process.pid);
+
 							assert.strictEqual(list![0].memory, undefined);
+
 							assert.strictEqual(list![0].commandLine, undefined);
+
 							resolve(true);
 						});
 					},
@@ -556,6 +625,7 @@ if (isWindows) {
 						return false;
 					},
 				);
+
 				assert.strictEqual(workerResult, true);
 			}
 		});
@@ -566,6 +636,7 @@ if (isWindows) {
 			assert.throws(() => {
 				getProcessTree(process.pid, (_) => {});
 			});
+
 			assert.throws(() => {
 				getProcessTree(process.pid, (_) => {}, ProcessDataFlag.Memory);
 			});
@@ -575,6 +646,7 @@ if (isWindows) {
 			assert.rejects(() => {
 				return promises.getProcessTree(process.pid);
 			});
+
 			assert.rejects(() => {
 				return promises.getProcessTree(
 					process.pid,
@@ -589,6 +661,7 @@ if (isWindows) {
 			assert.throws(() => {
 				getProcessList(process.pid, (_) => {});
 			});
+
 			assert.throws(() => {
 				getProcessList(
 					process.pid,
@@ -602,6 +675,7 @@ if (isWindows) {
 			assert.rejects(() => {
 				return promises.getProcessList(process.pid);
 			});
+
 			assert.rejects(() => {
 				return promises.getProcessList(
 					process.pid,

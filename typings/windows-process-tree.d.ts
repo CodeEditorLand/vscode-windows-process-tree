@@ -12,7 +12,9 @@ declare module "@vscode/windows-process-tree" {
 
 	export interface IProcessInfo {
 		pid: number;
+
 		ppid: number;
+
 		name: string;
 
 		/**
@@ -32,9 +34,13 @@ declare module "@vscode/windows-process-tree" {
 
 	export interface IProcessTreeNode {
 		pid: number;
+
 		name: string;
+
 		memory?: number;
+
 		commandLine?: string;
+
 		children: IProcessTreeNode[];
 	}
 

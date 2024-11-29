@@ -33,6 +33,7 @@ const MAX_FILTER_DEPTH = 10;
 
 interface IProcessInfoNode {
 	info: IProcessInfo;
+
 	children: IProcessInfoNode[];
 }
 
@@ -64,6 +65,7 @@ function buildRawTree(
 		const mySiblings = (childrenOf[info.ppid] ??= []);
 
 		const node = { info, children: myChildren };
+
 		mySiblings.push(node);
 
 		if (root === undefined && info.pid === rootPid) {
@@ -88,6 +90,7 @@ export function buildProcessTree(
 	if (process.platform !== "win32") {
 		throw new Error("buildProcessTree is only implemented on Windows");
 	}
+
 	const root = buildRawTree(rootPid, processList);
 
 	if (root === undefined) {
@@ -129,6 +132,7 @@ export function filterProcessList(
 	if (process.platform !== "win32") {
 		throw new Error("filterProcessList is only implemented on Windows");
 	}
+
 	const root = buildRawTree(rootPid, processList);
 
 	if (root === undefined) {
@@ -149,6 +153,7 @@ export function filterProcessList(
 		if (depth > 0) {
 			children.forEach((c) => buildList(c, depth - 1, accum));
 		}
+
 		return accum;
 	}
 
@@ -169,6 +174,7 @@ function getRawProcessList(
 	// once.
 	if (!requestInProgress) {
 		requestInProgress = true;
+
 		native.getProcessList((processList: IProcessInfo[]) => {
 			// It is possible and valid for one callback to cause another to be added to the queue.
 			// To avoid orphaning those callbacks, we repeat the draining until the queue is empty.
@@ -181,6 +187,7 @@ function getRawProcessList(
 			while (queue.length) {
 				queue.splice(0).forEach((cb) => cb(processList));
 			}
+
 			requestInProgress = false;
 		}, flags || 0);
 	}
@@ -200,6 +207,7 @@ export function getProcessList(
 	if (process.platform !== "win32") {
 		throw new Error("getProcessList is only implemented on Windows");
 	}
+
 	getRawProcessList(
 		(procs) => callback(filterProcessList(rootPid, procs)),
 		flags,
@@ -234,6 +242,7 @@ export function getProcessCpuUsage(
 	if (process.platform !== "win32") {
 		throw new Error("getProcessCpuUsage is only implemented on Windows");
 	}
+
 	native.getProcessCpuUsage(processList, callback);
 }
 
@@ -268,6 +277,7 @@ export function getProcessTree(
 	if (process.platform !== "win32") {
 		throw new Error("getProcessTree is only implemented on Windows");
 	}
+
 	getRawProcessList(
 		(procs) => callback(buildProcessTree(rootPid, procs)),
 		flags,
