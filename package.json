@@ -7,7 +7,7 @@
 		"@types/node": "22.10.1"
 	},
 	"main": "lib/index.js",
-	"name": "@vscode/windows-process-tree",
+	"name": "@codeeditorland/windows-process-tree",
 	"scripts": {
 		"compile": "tsc"
 	},
